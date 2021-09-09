@@ -1,0 +1,4 @@
+/*
+Una función de devolución de llamada es una función que se pasa a otra función como argumento, que luego se invoca dentro de la función externa para completar algún tipo de rutina o acción.
+Sin embargo, tenga en cuenta que las devoluciones de llamada se utilizan a menudo para continuar la ejecución del código después de que se haya completado una operación asincrónica ; se denominan devoluciones de llamada asincrónicas. Un buen ejemplo son las funciones de devolución de llamada ejecutadas dentro de un .then()bloque encadenado al final de una promesa después de que esa promesa se cumple o se rechaza. Esta estructura se utiliza en muchas API web modernas, como fetch().
+*/

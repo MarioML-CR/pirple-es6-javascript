@@ -34,6 +34,7 @@ innerLoop, se detenga este Loop interno, o incluso que se detenga el externo (ou
 /*
     For ... in loop, loop through an object's properties in arbitrary order
     user for looping over object properties
+    For Of Loop recorre los valores de un objeto iterable.
 */
 // for (let indice in users) {
 //     console.log(indice);
@@ -78,3 +79,30 @@ innerLoop, se detenga este Loop interno, o incluso que se detenga el externo (ou
 // for (const n of uniqueNameSet) {
 //     console.log(n);
 // }
+
+// for of: recorre los valores de 
+// un objeto iterable.
+const cars = ["BMW", "Volvo", "Mini"];
+const person = {
+    name: "Mario",
+    apellido: "Martinez",
+    edad: 51,
+}
+for (let x of cars){
+    console.log(x);
+}
+// error of no es iterable, pues 
+// person tiene propiedades
+// for (let x of person){
+//     console.log(x);
+// }
+// for in: recorre las propiedades de 
+// un objeto:
+for (let x in cars){
+    console.log(`El valor es ${x}`);
+}
+// es iterable, pero optengo solo
+// el nombre de las propiedades
+for (let x in person){
+    console.log(`los parámetros son: ${x}`);
+}
