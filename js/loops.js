@@ -88,7 +88,7 @@ const person = {
     apellido: "Martinez",
     edad: 51,
 }
-for (let x of cars){
+for (let x of cars) {
     console.log(x);
 }
 // error of no es iterable, pues 
@@ -98,11 +98,11 @@ for (let x of cars){
 // }
 // for in: recorre las propiedades de 
 // un objeto:
-for (let x in cars){
+for (let x in cars) {
     console.log(`El valor es ${x}`);
 }
 // es iterable, pero optengo solo
 // el nombre de las propiedades
-for (let x in person){
+for (let x in person) {
     console.log(`los parámetros son: ${x}`);
 }

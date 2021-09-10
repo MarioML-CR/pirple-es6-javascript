@@ -40,15 +40,15 @@ const bill = new Person2("Bill", 30);
 console.log(bill);
 */
 // agregar métodos
-class Person3{
-    constructor(name, age){
+class Person3 {
+    constructor(name, age) {
         this.name = name;
         this.age = age;
     }
     greeting() {
         console.log("Classes R");
     }
-    static sayHey(){
+    static sayHey() {
         console.log("Hey...!");
     }
 }
@@ -57,14 +57,14 @@ const janeDoe = new Person3("Jane Doe", 45);
 // janeDoe.greeting();
 // para modificar un método desde fuera de la
 // clase se debe usar el prototype, ej
-Person3.prototype.greeting = function() {
+Person3.prototype.greeting = function () {
     return "Now is different";
 }
 // janeDoe.greeting();
 // herencia
 // super keyword calls functions on an object's
 // parect class
-class Employee extends Person3{
+class Employee extends Person3 {
     constructor(name, age, position) {
         super(name, age);
         this.position = position;
@@ -82,40 +82,40 @@ const barb = new Employee("Barb", 27, "developer");
 // barb.testGreeting(); // no es necesario
 // barb.greeting();
 // barb.sayGreeting();
-class Customer extends Person3{
-    constructor({name="customer", age="n/a", contactMethod}){
+class Customer extends Person3 {
+    constructor({ name = "customer", age = "n/a", contactMethod }) {
         super(name, age);
         this.contactMethod = contactMethod;
         this.accountCredit = null;
     }
     static temp = 0;
-    addCredit(amount){
+    addCredit(amount) {
         this.accountCredit += amount;
     }
-    reduceCredit(amount){
+    reduceCredit(amount) {
         this.accountCredit -= amount;
     }
-    static sayHi(){
+    static sayHi() {
         console.log("Hi!");
     }
-    static sayCustomerNames(...customers){ // cualquier número de customers
+    static sayCustomerNames(...customers) { // cualquier número de customers
         // console.log(customers);
-        for (const c of customers){
+        for (const c of customers) {
             console.log(c.name);
         }
     }
-    static transferCredit(amount, source, target){
-        if (source.accountCredit >= amount){
+    static transferCredit(amount, source, target) {
+        if (source.accountCredit >= amount) {
             target.accountCredit += amount;
             source.accountCredit -= amount;
         } else {
             console.log(`${source.name} have no fond`);
         }
-        
+
     }
 }
-const customer1 = new Customer({contactMethod: "email"});
-const customer2 = new Customer({name: "Mario", contactMethod: "phone"});
+const customer1 = new Customer({ contactMethod: "email" });
+const customer2 = new Customer({ name: "Mario", contactMethod: "phone" });
 // console.log(customer1);
 // const customer2 = new Customer({name: "Billy Bob", contactMethod: "email"});
 // console.log(customer2);
@@ -142,7 +142,7 @@ necesite replicar en todas las instancias.
 // Customer.transferCredit(101, customer1, customer2);
 // console.log(customer1.accountCredit, customer2.accountCredit);
 class Family {
-    constructor(lastName){
+    constructor(lastName) {
         this.lastName = lastName;
     }
     sayFamilyName() {
@@ -150,8 +150,8 @@ class Family {
     }
 }
 
-class Parents extends Family{
-    constructor(lastName, fistName){
+class Parents extends Family {
+    constructor(lastName, fistName) {
         super(lastName);
         this.mother = fistName;
     }
@@ -163,7 +163,7 @@ const willy = new Parents("Smith", "Willy");
 // annie.sayFamilyName();
 // composicion
 class FamilyMember {
-    constructor(firstName, lastName, relationship){
+    constructor(firstName, lastName, relationship) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.relationship = relationship;
@@ -176,12 +176,12 @@ const dad2 = new FamilyMember("George", "Smith", "dad");
 const mom2 = new FamilyMember("Patty", "Smith", "mom");
 const annie2 = new FamilyMember("Jimmy", "Smith", "daugther");
 const willy2 = new FamilyMember("Willy", "Smith", "son");
-class FamilyGroup{
-    constructor(parents=[], children=[]) {
+class FamilyGroup {
+    constructor(parents = [], children = []) {
         this.parents = parents;
         this.children = [];
     }
-    addMember(member){
+    addMember(member) {
         this.children.push(member);
     }
 }
@@ -194,9 +194,9 @@ const smithFamily = {
     3: ["Jimmy", "Smith", "daugther"],
     4: ["Willy", "Smith", "son"],
 }
-const createFamilyGroup = (famArray)=>{
+const createFamilyGroup = (famArray) => {
     const famGroup = new FamilyGroup();
-    for (const prop of famArray){
+    for (const prop of famArray) {
         if (prop.relationship === "mom" || prop.relationship === "dad") {
             famGroup.parents.push(prop);
         } else {
@@ -210,7 +210,7 @@ const createFamilyGroup = (famArray)=>{
 const createFamily = (famObj) => {
     // const allMembers = [];
     const newFamGroup = new FamilyGroup();
-    for (const prop in famObj){
+    for (const prop in famObj) {
         console.log(prop);
         const [first, last, relationship] = famObj[prop];
         const newMember = new FamilyMember(first, last, relationship);
