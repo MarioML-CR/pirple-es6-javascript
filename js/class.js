@@ -206,7 +206,12 @@ const createFamilyGroup = (famArray) => {
     // console.log(famGroup);
     return famGroup;
 }
-
+function param() {
+    for (const f in smithFamily) {
+        console.log(f);
+    }
+}
+param();
 const createFamily = (famObj) => {
     // const allMembers = [];
     const newFamGroup = new FamilyGroup();
@@ -230,3 +235,15 @@ const createFamily = (famObj) => {
 
 const theSmiths = createFamily(smithFamily);
 console.log(theSmiths);
+
+var myCar = {
+    make: 'Ford',
+    model: 'Mustang',
+    year: 1969
+};
+function iterarObj() {
+    for (const p in myCar) {
+        console.log(`${p}: ${myCar[p]}`);
+    }
+}
+iterarObj();

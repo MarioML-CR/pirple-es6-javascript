@@ -67,7 +67,7 @@ function anotherLogger(num1, num2, cb) {
     // console.log(squaredAndSummedNums);
     cb();
 }
-anotherLogger(10,50, function() {
+anotherLogger(10, 50, function () {
     // console.log("Hey!");
 })
 
@@ -84,7 +84,7 @@ const fakeData = {
     text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit, possimus saepe nobis ipsam veritatis beatae dolorem modi! Culpa, aliquid quae! Dolorem quidem nemo aliquam voluptates assumenda fuga saepe animi tenetur!",
 }
 // a la función requestData se le pasa otra función
-miBoton.addEventListener("click", function(){
+miBoton.addEventListener("click", function () {
     requestData(popultateDom);
 });
 
@@ -92,7 +92,7 @@ function requestData(cb) {
     let data = "Loading...";
     cb(data);
     // Fake server request and response
-    setTimeout(() =>{
+    setTimeout(() => {
         // Response from server
         data = fakeData.text;
         cb(data);
@@ -102,14 +102,14 @@ function popultateDom(data) {
     myPara.innerText = `${data}`;
 }
 
-function counter(){
+function counter() {
     setTimeout(() => {
         console.log("First");
         setTimeout(() => {
             console.log("Second");
             setTimeout(() => {
                 console.log("Third");
-                setTimeout(() =>{
+                setTimeout(() => {
                     console.log("Fourth");
                 }, 400)
             }, 600)
@@ -119,21 +119,21 @@ function counter(){
 
 // counter();
 
-function numCruncher1(num, cb){
+function numCruncher1(num, cb) {
     const newNum = num * num;
     cb(newNum);
 }
-function numCruncher2(num, cb){
+function numCruncher2(num, cb) {
     const anotherNewNum = num / 100;
     cb(anotherNewNum);
 }
-function totalSum(a, b, cb){
+function totalSum(a, b, cb) {
     cb(a + b);
 }
 function crunchNumbers(a, b, cb1, cb2, cb3) {
-    cb1(a, function(x) {
-        cb2(b, function(y) {
-            cb3(x, y, function(result) {
+    cb1(a, function (x) {
+        cb2(b, function (y) {
+            cb3(x, y, function (result) {
                 console.log(result);
             });
         });
@@ -152,27 +152,33 @@ cumplido : significa que la operación se completó con éxito.
 rechazado : significa que la operación falló.
 Una promesa pendiente puede cumplirse con un valor o rechazarse con un motivo (error). Cuando ocurre cualquiera de estas opciones, thense llama a los controladores asociados en cola por el método de una promesa . Si la promesa ya se ha cumplido o rechazado cuando se adjunta un controlador correspondiente, se llamará al controlador, por lo que no hay condición de carrera entre la finalización de una operación asincrónica y la vinculación de sus controladores.
 */
-const testPromise = new Promise((resolve, reject) => {
-    if (Math.random() > 0.5) {
-        reject("Promises no good! Rejected");
-    }
-    setTimeout(() => {
-        resolve("promese OK!");
-    }, 1000);
-});
+// const testPromise = new Promise((resolve, reject) => {
+//     if (Math.random() > 0.5) {
+//         reject("Promises no good! Rejected");
+//     }
+//     setTimeout(() => {
+//         resolve("promese OK!");
+//     }, 1000);
+// });
 
 // testPromise.then((resolveMessage) => {
 //     console.log(`Looks like: ${resolveMessage}`);
-// }).then(() => {
-//     console.log("I should run after the promise is resolved");
-// }).then(() => {
-//     console.log("Promeses ara awesome");
-// }).catch((rejectMessage) => {
-//     console.log(`Error: ${rejectMessage}`);
-// });
+// })
+//     .then(() => {
+//         console.log("I should run after the promise is resolved");
+//     })
+//     .then(() => {
+//         console.log("Promeses ara awesome");
+//     })
+//     .catch((rejectMessage) => {
+//         console.log(`Error: ${rejectMessage}`);
+//     });
 
 function numAdder(n1, n2) {
     return new Promise((resolve, reject) => {
+        if (n1 === n2) {
+            reject("Los valores no pueden ser iguales");
+        }
         const addedNums = n1 + n2;
         setTimeout(() => {
             resolve(addedNums);
@@ -181,13 +187,90 @@ function numAdder(n1, n2) {
 }
 function numSquarer(num) {
     return new Promise((resolve, reject) => {
+        if (num > 20) reject("No puede ser mayor a 400 el resultado");
         setTimeout(() => {
             resolve(num * num);
         }, 900);
     })
 }
-numAdder(3, 7).then((data) => {
-    return numSquarer(data);
-}).then((moreData) => {
-    console.log(moreData);
-});
+// forma corta
+// numAdder(14, 15)
+//     .then(data => numSquarer(data))
+//     .then(moreData => console.log(moreData))
+//     .catch(rejectedMess => console.log(`Error: ${rejectedMess}`));
+
+// forma larga equivalente
+// numAdder(2, 3)
+//     .then(data => {
+//         return numSquarer(data);
+//     }).
+//     then(moreData => {
+//         console.log(moreData);
+//     }).
+//     catch(msjError => {
+//         console.log(`Error: ${msjError}`);
+//     })
+
+// function alwaysResolves() {
+//     return Promise.resolve("I love resolving");
+// }
+// alwaysResolves().then(data => console.log(data))
+
+// const prom = Promise.resolve([10, 15, 15]);
+// prom
+//     .then(nums => nums.map(num => num * 10))
+//     .then(transformedNums => {
+//         let res = 0;
+//         for (const n of transformedNums) {
+//             res += n;
+//         }
+//         return res;
+//     })
+//     .then(suma => {
+//         return Math.pow(suma, 0.5);
+//     })
+//     .then(cuadrado => {
+//         return cuadrado + cuadrado;
+//     })
+//     .then(final => console.log(`Al final el valor es: ${final}`));
+
+// Promise.all
+
+// const p1 = new Promise((resolve, reject) => {
+//     setTimeout(() => {
+//         resolve("A");
+//     }, 2000)
+// })
+// const p2 = Promise.resolve("B");
+// const p3 = Promise.reject("rejection");
+
+// espera que todas las promesas estén resultas, si al menos 1 es rechazada todo se rechaza
+// Promise.all([p1, p2, p3])
+//     .then(data => console.log(data))
+//     .catch(err => console.log(err));
+
+// const userName = new Promise((resolve, reject) => {
+//     setTimeout(() => {
+//         resolve({ text: "mml123" });
+//     }, 1000)
+// });
+// const position = new Promise((resolve, reject) => {
+//     setTimeout(() => {
+//         resolve({ text: "manager" });
+//         // reject({ text: "manager" });
+//     }, 300)
+// });
+
+// Promise.all([userName, position])
+//     .then(data => data.map(entry => entry.text))
+//     .then(content => console.log(content))
+//     .catch(err => console.log(err));
+
+// Promise.race, lanza el que responde primero, si el que termina primero es un resolve lo lanza correcto de lo contrario lanza el error.
+
+// Promise.race([userName, position])
+// .then(data => console.log(`Usando Race ${data.text}`))
+// .catch(err => console.log(err.text));
+
+
+
