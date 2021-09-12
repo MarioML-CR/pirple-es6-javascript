@@ -142,7 +142,7 @@ function crunchNumbers(a, b, cb1, cb2, cb3) {
 // crunchNumbers(5, 10, numCruncher1, numCruncher2, totalSum);
 
 /*
-El Promiseobjeto representa la eventual finalización (o falla) de una operación asincrónica y su valor resultante.
+El Promise objeto representa la eventual finalización (o falla) de una operación asincrónica y su valor resultante.
 A Promisees un proxy de un valor que no se conoce necesariamente cuando se crea la promesa. Le permite asociar controladores con el valor eventual de éxito o la razón del fracaso de una acción asincrónica. Esto permite que los métodos asincrónicos devuelvan valores como los métodos síncronos: en lugar de devolver inmediatamente el valor final, el método asincrónico devuelve una promesa de proporcionar el valor en algún momento en el futuro.
 
 A Promiseestá en uno de estos estados:
@@ -152,27 +152,29 @@ cumplido : significa que la operación se completó con éxito.
 rechazado : significa que la operación falló.
 Una promesa pendiente puede cumplirse con un valor o rechazarse con un motivo (error). Cuando ocurre cualquiera de estas opciones, thense llama a los controladores asociados en cola por el método de una promesa . Si la promesa ya se ha cumplido o rechazado cuando se adjunta un controlador correspondiente, se llamará al controlador, por lo que no hay condición de carrera entre la finalización de una operación asincrónica y la vinculación de sus controladores.
 */
-// const testPromise = new Promise((resolve, reject) => {
-//     if (Math.random() > 0.5) {
-//         reject("Promises no good! Rejected");
-//     }
-//     setTimeout(() => {
-//         resolve("promese OK!");
-//     }, 1000);
-// });
+const testPromise = new Promise((resolve, reject) => {
+    const num = Math.random();
+    if (num > 0.5) {
+        reject("Promises no good! Rejected");
+    }
+    setTimeout(() => {
+        resolve("promese OK!");
+    }, 1000);
+});
 
-// testPromise.then((resolveMessage) => {
-//     console.log(`Looks like: ${resolveMessage}`);
-// })
-//     .then(() => {
-//         console.log("I should run after the promise is resolved");
-//     })
-//     .then(() => {
-//         console.log("Promeses ara awesome");
-//     })
-//     .catch((rejectMessage) => {
-//         console.log(`Error: ${rejectMessage}`);
-//     });
+testPromise
+    .then((resolveMessage) => {
+        console.log(`Looks like: ${resolveMessage}`);
+    })
+    .then(() => {
+        console.log("I should run after the promise is resolved");
+    })
+    .then(() => {
+        console.log("Promeses ara awesome");
+    })
+    .catch((rejectMessage) => {
+        console.log(`Error: ${rejectMessage}`);
+    });
 
 function numAdder(n1, n2) {
     return new Promise((resolve, reject) => {

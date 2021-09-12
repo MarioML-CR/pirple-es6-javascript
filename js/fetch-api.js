@@ -8,7 +8,7 @@ const myButton = document.getElementById("btn_planet");
 myButton.addEventListener("click", getPlanet);
 const listPlanets = document.getElementById("btn_ListPlanets");
 listPlanets.addEventListener("click", getPlanets);
-const lPlanets = new Object();
+const lPlanets = [];
 let consecutivo = 0;
 // alternativa con RegEx
 // function getPlanets() {
@@ -39,10 +39,12 @@ function listaDePlanets(numPlanets) {
             .catch(err => console.log(err.message));
     }
     console.log(lPlanets);
+    console.log(lPlanets.length);
 }
 function cargarPlanetas(planetName) {
-    consecutivo += 1;
-    lPlanets[`${consecutivo}`] = planetName;
+    // consecutivo += 1;
+    // lPlanets[`${consecutivo}`] = planetName;
+    lPlanets.push(planetName);
 }
 function getPlanet() {
     const randonNum = Math.floor(Math.random() * 60) + 1;
@@ -152,3 +154,17 @@ terrain: "unknown"
 url: "https://swapi.dev/api/planets/60/"
 
 */
+// obtener el indice y el valor de una array
+// const myArray = [1, 2, 3, 4];
+// for (const [index, prop] of myArray.entries()) {
+//     console.log(index, prop);
+// }
+
+// crear una lista desplegable
+
+const selector = document.getElementById("selector");
+selector.addEventListener("change", highlight);
+
+function highlight(e) {
+    
+}
