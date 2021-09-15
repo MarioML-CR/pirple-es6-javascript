@@ -1,28 +1,43 @@
+const starWars = document.getElementById("star-wars");
+const temp = document.createElement("div");
+temp.innerText = "Loading ..., please wait!";
+starWars.appendChild(temp);
+
+
+
 let numPlanetas = 0;
 let planetas = [];
 var planetasName = [];
-getPlanets();
-cargarNombrePlanetas();
-// console.log(planetas);
+getPlanets()
+    .then(() => {
+        createList();
+    })
+    .then(() => {
+        cearFuncion();
+    })
+    ;
+
+function cargarDom(data) {
+    data.innerText = data;
+}
 function getPlanets() {
-    fetch(`http://swapi.dev/api/planets/`)
+    return fetch(`http://swapi.dev/api/planets/`)
         .then(data => data.json())
         .then(planets => getPlanetas(planets.count))
         .catch(err => console.log(err.message));
 }
 
 function getPlanetas(numPlanets) {
+    let promesas = [];
     numPlanetas = numPlanets;
-    console.log(numPlanetas);
     let i = 0;
     for (i = 1; i <= numPlanetas; i++) {
-        fetch(`http://swapi.dev/api/planets/${i}/`)
+        promesas.push(fetch(`http://swapi.dev/api/planets/${i}/`)
             .then(data => data.json())
             .then(d => cargarPlaneta(d))
-            .catch(err => console.log(err.message));
+            .catch(err => console.log(err.message)));
     }
-    console.log(planetas);
-    console.log(planetasName);
+    return Promise.all(promesas);
 }
 function cargarPlaneta(planeta) {
     const planet = new Object();
@@ -35,69 +50,28 @@ function cargarPlaneta(planeta) {
 
 function cargarNombrePlanetas(nombre) {
     if (typeof nombre === "string") {
-        // console.log(nombre);
         planetasName.push(nombre);
     }
 };
-console.log(planetasName);
+
 function createList() {
+    let p = `<select name="planets" id="planets">
+    <option value=" ">Please choose an option</option>`;
     for (const i in planetasName) {
-        console.log(i, value);
+        p += `
+        <option value="${i}">${planetasName[i]}</option>
+        `;
     }
+    p += `</select>`;
+    starWars.removeChild(temp);
+    starWars.innerHTML = p;
+    cearFuncion();
 }
-createList();
-let array1 = [];
-let uno = "uno";
-let dos = "dos";
-let tres = 3;
-array1.push(uno);
-array1.push(dos);
-array1.push(tres);
-console.log(array1 instanceof Array);
-// for (const i of array1) {
-//     console.log(typeof i);
-// }
-// console.log(array1);
-// let array2 = [];
-// let myObj = new Object();
-// myObj["nombre"] = "pamela";
-// myObj["apellido"] = "benavides";
-// array2.push(myObj);
-// let myObj2 = new Object();
-// myObj2["nombre"] = "xinia";
-// myObj2["apellido"] = "vargas";
-// array2.push(myObj2);
-// array2.forEach(e => console.log(e));
-// console.log(array2);
-// console.log(array1.length);
-// const objPatron = {nombre: "xinia", apellido: "vargas", age: 1};
-// function fillObj(obj, arr) {
-//     let newObj = new Object();
-//     let par, value;
-//     for (const p in obj) {
-//         // console.log(`nombre parametro: ${p}, valor: ${obj[p]}`);
 
-//         // par = `newObj.${p}`
-//         // console.log(par);
-//         // value = `${obj[p]}`
-//         // par = value;
-//         // console.log(value);
-//         newObj.p = obj[p]
-//     }
-//     console.log(newObj);
-// }
-// fillObj(objPatron, array1);
-// function fillArray(){
-
-// }
-
-// var keys = [];
-// with (Array.prototype) {
-//     let n = "uno";
-//     let m = "dos";
-//     for (let i = 0; i < 4; i++) {
-//         const obj = {nombre: n + i, apellido: m + i};
-//         keys.push(obj);
-//     }  
-// }
-// console.log(keys);
+function cearFuncion() {
+    const myButton = document.getElementById("planets");
+    myButton.addEventListener("submit", viewPlants);
+}
+function viewPlants(e) {
+    console.log(e.target);
+}
