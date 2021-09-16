@@ -93,14 +93,14 @@ function planetCharacteristic(num) {
         <ul>
             <li> <b>rotation period</b>: ${rotation_period}</li>
             <li> <b>orbital period</b>: ${orbital_period}</li>
-            <li> <b>diameter</b>: ${diameter}</li>
+            <li> <b>diameter</b>: ${parseInt(diameter).toLocaleString('en-US')}</li>
             <li> <b>climate</b>: ${climate}</li>
-            <li> <b>created</b>: ${created}</li>
+            <li> <b>created</b>: ${new Date(created).toISOString().slice(0,10)}</li>
             <li> <b>gravity</b>: ${gravity}</li>
             <li> <b>population</b>: ${population === "unknown" ? population : parseInt(population).toLocaleString('en-US')}</li>
             <li> <b>surface water</b>: ${surface_water}</li>
             <li> <b>terrain</b>: ${terrain}</li>
-            <li> <b>edited</b>: ${edited}</li>
+            <li> <b>edited</b>: ${new Date(edited).toLocaleDateString('es-ES')}</li>
         </ul>`
         myPlanetDiv.innerHTML += parameters;
         starWars.appendChild(myPlanetDiv);
