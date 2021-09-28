@@ -103,7 +103,7 @@ const myObj = {
         console.log("hi");
     }
 }
-myObj.sayHi();
+// myObj.sayHi();
 
 // ES6 has methos definitions for creating methods
 
@@ -128,4 +128,58 @@ const anotherObj = {
     }
 }
 
-anotherObj.anotherMethod("Tim", 1, false, true, [123], 61);
+// anotherObj.anotherMethod("Tim", 1, false, true, [123], 61);
+
+// OBject property shorthands
+
+const a = 10;
+const b = 20;
+const c = 30;
+
+const d = {
+    a: a,
+    b: b,
+    c: c
+}
+// console.log(d.a);
+const e = {
+    a, b, c
+}
+// console.log(e.a);
+
+const {c: anotherC } = e;
+// console.log(anotherC);
+
+function objectBuilder (x, y, z) {
+    return {
+        x, y, z
+    }
+}
+// console.log(objectBuilder(10, "bob", true));
+
+// computed preoperty keys
+// allows use of [] which will evaluate (a.k.a. compute) as the property name
+
+const myID = 1;
+const computedObj = {
+    [myID]: "386527",
+}
+// console.log(computedObj.myID);
+
+function capitalizar(word){
+    const a = word.charAt(0).toUpperCase();
+    const b = word.slice(1).toLowerCase();
+    return a + b;
+}
+
+const obj123 = {
+    [capitalizar("hELLO")]: "something",
+}
+// console.log(obj123);
+
+function dataFormat(arr){
+    return arr.map(n => {
+        console.log(n)
+    })
+}
+// dataFormat(bob);
